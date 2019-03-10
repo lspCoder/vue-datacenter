@@ -62,9 +62,7 @@ export default {
   },
   mounted: function () {
     var self = this;
-    this.timerId = setInterval(() => {
-      self.updateAll();
-    }, 5000);
+    this.timerId = setInterval(this.updateAll, 5000);
   },
   methods: {
     updateAll: function () {
