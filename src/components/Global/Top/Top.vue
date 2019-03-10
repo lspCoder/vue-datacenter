@@ -12,22 +12,27 @@
 <script>
 export default {
   name: 'Top',
-
-  computed: {
-    currentTime: function () {
-      return this.formatTime(new Date(), 'yyyy/MM/dd/HH:mm:ss');
+  data () {
+    return {
+      currentTime: this.formatTime(new Date(), 'yyyy/MM/dd/HH:mm:ss'),
+      timerId: null
     }
+  },
+  mounted: function () {
+    this.timerId = setInterval(() => {
+      this.currentTime = this.formatTime(new Date(), 'yyyy/MM/dd/HH:mm:ss');
+    }, 1000);
   },
   methods: {
     formatTime (date, fmt) {
       var o = {
-        'M+': date.getMonth() + 1, // 月份
-        'd+': date.getDate(),   // 日
-        'H+': date.getHours(),  // 小时
-        'm+': date.getMinutes(),  // 分
-        's+': date.getSeconds(),  // 秒
-        'q+': Math.floor((date.getMonth() + 3) / 3),  // 季度
-        'S': date.getMilliseconds()   // 毫秒
+        'M+': date.getMonth() + 1,
+        'd+': date.getDate(),
+        'H+': date.getHours(),
+        'm+': date.getMinutes(),
+        's+': date.getSeconds(),
+        'q+': Math.floor((date.getMonth() + 3) / 3),
+        'S': date.getMilliseconds()
       };
       if (/(y+)/.test(fmt)) {
         fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
@@ -39,12 +44,23 @@ export default {
       }
       return fmt;
     }
+  },
+  beforeDestroy () {
+    clearInterval(this.timerId);
   }
 }
 </script>
 
 <style lang="less" scoped>
 .top {
+  &::after{
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+  }
   .left {
     float: left;
     width: 200px;
@@ -70,7 +86,7 @@ export default {
     font-size: 30px;
     font-weight: bolder;
     text-shadow: 0 0 10px #00adff, 0 0 20px #00adff;
-    display: inline-block;
+    float: left;
   }
   .right {
     width: 300px;

@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "echarts": "^4.1.0",
     "vue": "^2.6.6",
     "vue-grid-layout": "^2.3.4",
     "vue-router": "^3.0.1",

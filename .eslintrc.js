@@ -12,20 +12,22 @@ module.exports = {
     'arrow-parens': 0,
 
     // 关闭语句强制分号结尾
-    "semi": [0],
+    "semi": 0,
 
     // allow async-await
     'generator-star-spacing': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 
-    "quotes": [1, "single"],
+    "quotes": 0,
 
     "spaced-comment": ["error", "always"],
-    "no-multi-spaces": ["error", { ignoreEOLComments: false }],
+    "no-multi-spaces": 0,
 
-    //空行最多不能超过100行
-    "no-multiple-empty-lines": [0, { "max": 100 }],
+    "no-dupe-keys": 0,
+
+    // 空行最多不能超过100行
+    "no-multiple-empty-lines": [0, { "max": 100 }]
   },
   parserOptions: {
     parser: 'babel-eslint'

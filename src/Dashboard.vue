@@ -20,7 +20,7 @@
         :key="item.id"
       >
       <!-- 动态组件 -->
-        <component v-bind:is="item.compentent"> </component>
+        <component v-bind:is="item.component"> </component>
       </grid-item>
     </grid-layout>
   </div>
@@ -31,18 +31,18 @@
 import { GridLayout, GridItem } from 'vue-grid-layout'
 
 var testLayout = [
-  { x: 0, y: 0, w: 12, h: 2, i: 'top', static: false, compentent: 'Top' },
+  { x: 0, y: 0, w: 12, h: 2, i: 'top', static: false, component: 'Top' },
 
-  { x: 0, y: 2, w: 3, h: 6, i: 'left1', static: false },
-  { x: 0, y: 7, w: 3, h: 5, i: 'left2', static: false },
-  { x: 0, y: 13, w: 3, h: 6, i: 'left3', static: false },
-  { x: 0, y: 17, w: 3, h: 6, i: 'left4', static: false },
+  { x: 0, y: 2, w: 3, h: 5, i: 'left1', static: false, component: 'Left1' },
+  { x: 0, y: 7, w: 3, h: 4, i: 'left2', static: false, component: 'Left2' },
+  { x: 0, y: 13, w: 3, h: 6, i: 'left3', static: false, component: 'Left3' },
+  { x: 0, y: 17, w: 3, h: 8, i: 'left4', static: false, component: 'Left4' },
 
-  { x: 3, y: 2, w: 6, h: 11.5, i: 'center1', static: false },
-  { x: 3, y: 2, w: 6, h: 11.5, i: 'center2', static: false },
+  { x: 3, y: 2, w: 6, h: 11.5, i: 'center1', static: false, component: 'Center1' },
+  { x: 3, y: 2, w: 6, h: 11.5, i: 'center2', static: false, component: 'Center2' },
 
-  { x: 9, y: 2, w: 3, h: 6, i: 'right1', static: false },
-  { x: 9, y: 9, w: 3, h: 17, i: 'right2', static: false }
+  { x: 9, y: 2, w: 3, h: 4, i: 'right1', static: false, component: 'Right1' },
+  { x: 9, y: 9, w: 3, h: 19, i: 'right2', static: false, component: 'Right2' }
 ]
 
 export default {
@@ -56,17 +56,29 @@ export default {
       layout: testLayout,
       draggable: true,
       resizable: true,
-      index: 0
+      index: 0,
+      timerId: null
     }
+  },
+  mounted: function () {
+    var self = this;
+    this.timerId = setInterval(() => {
+      self.updateAll();
+    }, 5000);
+  },
+  methods: {
+    updateAll: function () {
+
+    }
+  },
+  beforeDestroy () {
+    clearInterval(this.timerId);
   }
 }
 </script>
 <style lang="less" scoped>
-.vue-grid-layout {
-  // background: #eee;
-}
+
 .vue-grid-item:not(.vue-grid-placeholder) {
-  // background: #ccc;
   border: 1px solid #FFF;
 }
 

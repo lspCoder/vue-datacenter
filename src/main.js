@@ -5,9 +5,15 @@ import store from './store'
 
 import './assets/css/base.less'
 
+/* 引入全局组件 */
 import './components'
 
+/* 引入echarts */
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
+
 Vue.config.productionTip = false
+Vue.config.silent = true
 
 new Vue({
   // router,
