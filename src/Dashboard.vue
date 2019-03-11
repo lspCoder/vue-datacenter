@@ -12,15 +12,15 @@
       <grid-item
         :h="item.h"
         :i="item.i"
+        :key="item.id"
         :static="item.static"
         :w="item.w"
         :x="item.x"
         :y="item.y"
         v-for="(item) in layout"
-        :key="item.id"
       >
-      <!-- 动态组件 -->
-        <component v-bind:is="item.component"> </component>
+        <!-- 动态组件 -->
+        <component v-bind:is="item.component"></component>
       </grid-item>
     </grid-layout>
   </div>
@@ -61,7 +61,6 @@ export default {
     }
   },
   mounted: function () {
-    var self = this;
     this.timerId = setInterval(this.updateAll, 5000);
   },
   methods: {
@@ -75,9 +74,8 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-
 .vue-grid-item:not(.vue-grid-placeholder) {
-  border: 1px solid #FFF;
+  border: 1px solid #fff;
 }
 
 .vue-grid-item.resizing {

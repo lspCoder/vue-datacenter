@@ -1,18 +1,23 @@
 <template>
   <div class="content">
-    <CurvePath id="usersPower" />
+    <CurvePath id="usersPower"/>
     <div class="users">
       <span class="name">煤改电用户数：</span>
-      <span class="total">{{usersData.total}}</span>
+      <span class="total">{{usersData.totalUsers}}</span>
     </div>
-    <div class="row" :style="{ background: background }">
+    <div :style="{ background: background }" class="row">
       <span>户号</span>
       <span>户名</span>
       <span>最大负荷</span>
       <span>发生时间</span>
       <span>标识</span>
     </div>
-    <div class="row" v-for="item in usersData.list" :key="item.id" :style="{background: item.id % 2 === 0 ? background : '' }">
+    <div
+      :key="item.id"
+      :style="{background: item.id % 2 === 0 ? background : '' }"
+      class="row"
+      v-for="item in usersData.list"
+    >
       <span>{{item.id}}</span>
       <span>{{item.name}}</span>
       <span>{{item.power}}</span>
@@ -68,6 +73,12 @@ export default {
   margin-left: 35px;
   margin-right: 10px;
   margin-top: 5px;
+  font-family: SourceHanSansCN-Normal;
+}
+.total {
+  font-family: Pirulen;
+  color: rgb(91, 255, 255);
+  font-size: 20px;
 }
 </style>
 

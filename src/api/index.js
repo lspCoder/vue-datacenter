@@ -1,28 +1,29 @@
-import { getRandom } from '@/utils';
+import {
+  getRandom
+} from '@/utils';
 
 /* 获取模拟数据 */
 export function getRingChartData () {
-  let ringCharData = [
-    {
-      name: '累计用电量',
-      value: 2500 + Math.floor(Math.random() * 100),
-      unit: 'kw.h'
-    },
-    {
-      name: '台区编号',
-      value: 584000 + Math.floor(Math.random() * 1000),
-      unit: ''
-    },
-    {
-      name: '台区总数',
-      value: 300 + Math.floor(Math.random() * 100),
-      unit: ''
-    },
-    {
-      name: '煤改电户数',
-      value: Math.floor(Math.random() * 100),
-      unit: ''
-    }
+  let ringCharData = [{
+    name: '累计用电量',
+    value: 2500 + Math.floor(Math.random() * 100),
+    unit: 'kw.h'
+  },
+  {
+    name: '台区编号',
+    value: 584000 + Math.floor(Math.random() * 1000),
+    unit: ''
+  },
+  {
+    name: '台区总数',
+    value: 300 + Math.floor(Math.random() * 100),
+    unit: ''
+  },
+  {
+    name: '煤改电户数',
+    value: Math.floor(Math.random() * 100),
+    unit: ''
+  }
   ]
   return new Promise(function (resolve, reject) {
     resolve(ringCharData)
@@ -64,26 +65,27 @@ export function getLineLossData () {
   })
 }
 
+/* 获取煤改电数据 */
 export function getElectricityData () {
-  let electricityData = [
-    {
-      name: '供电量',
-      value: 2000 + Math.floor(Math.random() * 1000) + 'KW.h'
-    },
-    {
-      name: '用电量',
-      value: 6000 + Math.floor(Math.random() * 1000) + 'KW.h'
-    },
-    {
-      name: '煤改电户用电',
-      value: 200 + Math.floor(Math.random() * 100) + 'KW.h'
-    }
+  let electricityData = [{
+    name: '供电量',
+    value: 2000 + Math.floor(Math.random() * 1000) + 'KW.h'
+  },
+  {
+    name: '用电量',
+    value: 6000 + Math.floor(Math.random() * 1000) + 'KW.h'
+  },
+  {
+    name: '煤改电户用电',
+    value: 200 + Math.floor(Math.random() * 100) + 'KW.h'
+  }
   ]
   return new Promise(function (resolve, reject) {
     resolve(electricityData)
   })
 }
 
+/* 获取表格用户用电数据 */
 export function getTableData () {
   var datas = []
   var total = getRandom(19, 24)
@@ -102,5 +104,48 @@ export function getTableData () {
       totalUsers: total,
       list: datas
     })
+  })
+}
+
+export function getLoadRateData () {
+  let loadRateData = {
+    loadTate: {
+      name: '负载率',
+      value: Math.floor(Math.random() * 100)
+    },
+    state: {
+      "key": ["轻载", "正常", "过载", "重载"],
+      "value": [Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)]
+    }
+  }
+  return new Promise(function (resolve, reject) {
+    resolve(loadRateData)
+  })
+}
+
+/* 获取电量分析数据 */
+export function getElectricityAnalysisData () {
+  let electricityAnalysisData = {
+    day: {
+      days: ['1日', '2日', '3日', '4日', '5日', '6日', '7日', '8日', '9日', '10日', '11日', '12日', '13日', '14日', '15日', '16日', '17日', '18日', '19日', '20日', '21日', '22日', '23日', '24日', '25日', '26日', '27日', '28日', '29日', '30日', '31日'],
+      data: {
+        "总电量": [72, 71, 70, 62, 64, 66, 70, 72, 73, 71, 73, 76, 78, 73, 74, 70, 68, 65, 64, 66, 62, 67, 70, 72, 70, 67, 68, 65, 64, 62, 61],
+        "谷电量": [12, 21, 30, 22, 24, 26, 30, 22, 23, 21, 23, 26, 38, 33, 34, 30, 28, 25, 34, 36, 32, 37, 30, 32, 20, 23, 28, 25, 24, 12, 21],
+        "同比总电量": [52, 61, 50, 62, 54, 56, 60, 52, 63, 61, 63, 66, 68, 63, 64, 60, 58, 55, 54, 56, 52, 60, 60, 62, 60, 61, 62, 55, 54, 52, 54],
+        "同比谷电量": [16, 26, 36, 24, 28, 36, 32, 32, 33, 28, 23, 21, 28, 30, 24, 30, 24, 25, 32, 26, 22, 27, 30, 35, 28, 26, 28, 23, 28, 18, 24]
+      }
+    },
+    month: {
+      months: ['10月', '11月', '12月', '1月', '2月', "3月"],
+      data: {
+        "总电量": [72, 70, 62, 72, 70, 61],
+        "谷电量": [15, 28, 12, 14, 22, 26],
+        "同比总电量": [54, 62, 50, 71, 62, 54],
+        "同比谷电量": [21, 33, 26, 34, 32, 24]
+      }
+    }
+  }
+  return new Promise(function (resolve, reject) {
+    resolve(electricityAnalysisData)
   })
 }

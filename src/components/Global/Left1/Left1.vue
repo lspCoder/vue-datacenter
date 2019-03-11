@@ -1,17 +1,20 @@
 <template>
   <div class="left1">
-    <Title text='概述' :iconUrl='img' />
+    <Title :iconUrl="img" text="概述"/>
     <div class="content">
       <div id="ringChart"></div>
       <div class="legend">
         <ul>
-        <li style="margin-bottom: 5px" v-for="(data) in ringChartData" :key="data.name">
-          <img :src="iconMap[data.name]" alt="">
-          <div class="text">
-            <p class="name">{{data.name}}</p>
-            <p class="value">{{data.value}} <span class="unit">{{data.unit}}</span></p>
-          </div>
-        </li>
+          <li :key="data.name" style="margin-bottom: 5px" v-for="(data) in ringChartData">
+            <img :src="iconMap[data.name]" alt>
+            <div class="text">
+              <p class="name">{{data.name}}</p>
+              <p class="value">
+                {{data.value}}
+                <span class="unit">{{data.unit}}</span>
+              </p>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -201,7 +204,7 @@ export default {
 }
 .name {
   font-size: 14px;
-  color: rgba(255, 255, 255, .6);
+  color: rgba(255, 255, 255, 0.6);
   letter-spacing: 1px;
 }
 .value {
@@ -211,7 +214,7 @@ export default {
 }
 .unit {
   font-size: 14px;
-  color: rgba(255, 255, 255, .6);
+  color: rgba(255, 255, 255, 0.6);
   font-family: SourceHanSansCN-Normal;
 }
 </style>

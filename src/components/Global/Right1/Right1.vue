@@ -1,7 +1,9 @@
 <template>
   <div class="content">
-    <div class="power center" v-for="item in electricityData" :key="item.name">
-      <p><img :src="img" alt=""></p>
+    <div :key="item.name" class="center" v-for="item in electricityData">
+      <p>
+        <img :src="img" alt="power">
+      </p>
       <p class="name">{{item.name}}</p>
       <p class="value">{{item.value}}</p>
     </div>
@@ -36,15 +38,18 @@ export default {
   align-items: center;
   height: 100%;
 }
+
 .center {
   text-align: center;
 }
+
 .name {
   color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
   margin-top: 3px;
   margin-bottom: 5px;
 }
+
 .value {
   color: rgb(91, 255, 255);
   font-size: 12px;
