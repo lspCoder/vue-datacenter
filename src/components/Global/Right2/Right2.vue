@@ -28,15 +28,10 @@
 </template>
 
 <script>
-import { getTableData } from '@/api'
-
-import CurvePath from '@/components/Global/CurvePath'
+import { getUsersPowerData } from '@/api'
 
 export default {
   name: 'Right2',
-  components: {
-    CurvePath
-  },
   data () {
     return {
       usersData: {},
@@ -44,7 +39,7 @@ export default {
     }
   },
   mounted () {
-    getTableData().then((data) => {
+    getUsersPowerData().then((data) => {
       this.usersData = data;
     })
   }

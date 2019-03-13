@@ -5,7 +5,9 @@
       :is-draggable="draggable"
       :is-resizable="resizable"
       :layout="layout"
-      :row-height="32"
+      :margin="[0, 0]"
+      :responsive="true"
+      :row-height="41"
       :use-css-transforms="true"
       :vertical-compact="true"
     >
@@ -31,7 +33,7 @@
 import { GridLayout, GridItem } from 'vue-grid-layout'
 
 var testLayout = [
-  { x: 0, y: 0, w: 12, h: 2, i: 'top', static: false, component: 'Top' },
+  { x: 0, y: 0, w: 12, h: 1.5, i: 'top', static: false, component: 'Top' },
 
   { x: 0, y: 2, w: 3, h: 5, i: 'left1', static: false, component: 'Left1' },
   { x: 0, y: 7, w: 3, h: 4, i: 'left2', static: false, component: 'Left2' },
@@ -74,9 +76,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.vue-grid-item:not(.vue-grid-placeholder) {
-  border: 1px solid #fff;
-}
+// .vue-grid-item:not(.vue-grid-placeholder) {
+//   border: 1px solid #fff;
+// }
 
 .vue-grid-item.resizing {
   opacity: 0.9;

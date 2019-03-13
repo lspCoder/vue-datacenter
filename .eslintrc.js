@@ -24,10 +24,14 @@ module.exports = {
     "spaced-comment": ["error", "always"],
     "no-multi-spaces": 0,
 
+    "no-unused-vars": 1,
+
     "no-dupe-keys": 0,
 
     // 空行最多不能超过100行
-    "no-multiple-empty-lines": [0, { "max": 100 }]
+    "no-multiple-empty-lines": [0, {
+      "max": 100
+    }]
   },
   parserOptions: {
     parser: 'babel-eslint'

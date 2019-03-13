@@ -1,14 +1,17 @@
 <template>
   <div class="left2">
     <div class="content">
-      <CurvePath id="cityToArea" />
+      <CurvePath id="cityToArea"/>
       <div class="left-text">
         <p class="city">{{cityAreaAlarmData.city}}</p>
         <p class="area">{{cityAreaAlarmData.area}}</p>
       </div>
       <div class="right-text">
-        <p class="power">{{cityAreaAlarmData.power}}<span class="unit">KVA</span></p>
-        <p class="alarm" :style="{color: alarmColor}">{{cityAreaAlarmData.alarm}}</p>
+        <p class="power">
+          {{cityAreaAlarmData.power}}
+          <span class="unit">KVA</span>
+        </p>
+        <p :style="{color: alarmColor}" class="alarm">{{cityAreaAlarmData.alarm}}</p>
       </div>
     </div>
   </div>
@@ -18,13 +21,8 @@
 /* 获取模拟数据 */
 import { getCityPowerData } from '@/api';
 
-import CurvePath from '@/components/Global/CurvePath'
-
 export default {
   name: 'Left2',
-  components: {
-    CurvePath
-  },
   data () {
     return {
       cityAreaAlarmData: {}
@@ -64,12 +62,12 @@ export default {
     width: 120px;
     .city {
       font-size: 18px;
-      color: #FFFFFF;
+      color: #ffffff;
       letter-spacing: 3px;
       font-family: SourceHanSansCN-Normal;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .area {
       font-size: 14px;
@@ -77,9 +75,9 @@ export default {
       letter-spacing: 3px;
       font-family: SourceHanSansCN-Normal;
       margin-top: 18px;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
   .right-text {

@@ -1,13 +1,12 @@
 <template>
   <div class="content">
     <Title :iconUrl="img" text="电量分析"/>
+    <Button-Group :left="80" :text="['月电量', '日电量']" :top="50"></Button-Group>
     <div id="electricityAnalysis"></div>
   </div>
 </template>
 
 <script>
-import Title from '../Title'
-
 /* 这里需要导入图片才能使用否则引入图片不显示 */
 import img from '@/assets/img/title.png'
 import type1 from '@/assets/img/type1.png'
@@ -17,9 +16,6 @@ import type4 from '@/assets/img/type4.png'
 
 export default {
   name: 'Center2',
-  components: {
-    Title
-  },
   data () {
     return {
       img: img,
@@ -43,6 +39,7 @@ export default {
   methods: {
     drawLineChart () {
       let myChart = this.$echarts.init(document.getElementById('electricityAnalysis'));
+      window.myChart = myChart;
       let option = {
         tooltip: {
           trigger: 'axis'
@@ -77,7 +74,6 @@ export default {
               width: 2
             }
           },
-          // 控制块级显示还是点级显示
           boundaryGap: false,
           axisLabel: {
             show: true,
@@ -169,7 +165,7 @@ export default {
       for (var key in data) {
         arr.push({
           name: key,
-          icon: this.iconMap[key]
+          icon: 'image://' + this.iconMap[key]
         })
       }
       return arr;
@@ -180,8 +176,8 @@ export default {
 
 <style lang="less" scoped>
 #electricityAnalysis {
-  height: 400px;
   width: 780px;
+  height: 400px;
   margin: 0 auto;
 }
 </style>

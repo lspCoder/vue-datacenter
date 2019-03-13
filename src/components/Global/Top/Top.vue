@@ -53,13 +53,13 @@ export default {
 
 <style lang="less" scoped>
 .top {
-  &::after{
-    visibility:hidden;
-    display:block;
-    font-size:0;
-    content:" ";
-    clear:both;
-    height:0;
+  &::after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: ' ';
+    clear: both;
+    height: 0;
   }
   .left {
     float: left;
@@ -94,7 +94,7 @@ export default {
     color: #ffffff;
     font-family: 'Pirulen';
     font-size: 18px;
-    margin-top: 50px;
+    margin-top: 40px;
   }
 }
 </style>

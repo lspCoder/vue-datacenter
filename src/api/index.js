@@ -86,7 +86,7 @@ export function getElectricityData () {
 }
 
 /* 获取表格用户用电数据 */
-export function getTableData () {
+export function getUsersPowerData () {
   var datas = []
   var total = getRandom(19, 24)
   for (var i = 1; i < total; i++) {
@@ -147,5 +147,27 @@ export function getElectricityAnalysisData () {
   }
   return new Promise(function (resolve, reject) {
     resolve(electricityAnalysisData)
+  })
+}
+
+export function getLoadAnalysisData () {
+  var loadAnalysisData = {
+    loadAnalysis: {
+      time: ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "24:00"],
+      data: {
+        "负载率": [72, 70, 62, 72, 70, 61, 78],
+        "同比负载率": [15, 28, 12, 14, 22, 26, 45]
+      }
+    },
+    powerAnalysis: {
+      time: ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "24:00"],
+      data: {
+        "负载率": [72, 70, 62, 72, 70, 61, 78],
+        "同比负载率": [70, 75, 72, 52, 50, 57, 67]
+      }
+    }
+  }
+  return new Promise(function (resolve, reject) {
+    resolve(loadAnalysisData)
   })
 }
