@@ -2,12 +2,15 @@
   <div class="content">
     <Title :iconUrl="img" text="负荷分析"/>
     <Button-Group :left="80" :text="['负荷分析', '负载分析']" :top="50"></Button-Group>
-    <div id="powerAnalysis"></div>
+    <chart :option="option" autoResize="true" height="400px" id="powerAnalysis" width="780px"/>
   </div>
 </template>
 
 <script>
 import echarts from 'echarts'
+import chart from '@/components/chart'
+
+import { getLoadAnalysisData } from '@/api'
 
 /* 这里需要导入图片才能使用否则引入图片不显示 */
 import img from '@/assets/img/title.png'
@@ -16,6 +19,9 @@ import type4 from '@/assets/img/type4.png'
 
 export default {
   name: 'Center1',
+  components: {
+    chart
+  },
   data () {
     return {
       img: img,
@@ -36,16 +42,29 @@ export default {
           fromColor: "rgba(0, 170, 255, 0.6)",
           toColor: "rgba(0, 170, 255, 0.1)"
         }
-      }
+      },
+      option: {}
     }
   },
   mounted () {
-    this.drawLineChart()
+    this._initData();
+    this.initChartOption();
+    setInterval(() => {
+      this._refreshData();
+    }, 5000);
   },
   methods: {
-    drawLineChart () {
-      let myChart = this.$echarts.init(document.getElementById('powerAnalysis'));
-      let option = {
+    _initData () {
+      getLoadAnalysisData().then((data) => {
+        this._createSeries(data.loadAnalysis.data);
+        this._createLegendData(data.loadAnalysis.data);
+      })
+    },
+    _refreshData () {
+      this._initData();
+    },
+    initChartOption () {
+      this.option = {
         tooltip: {
           trigger: 'axis'
         },
@@ -66,7 +85,8 @@ export default {
           right: 28,
           top: 50,
           padding: 0,
-          itemGap: 32
+          itemGap: 32,
+          data: []
         },
         calculable: true,
         xAxis: [{
@@ -126,18 +146,12 @@ export default {
           axisTick: {
             show: false
           }
-        }]
+        }],
+        series: []
       }
-      let data = {
-        "负载率": [72, 70, 62, 72, 70, 61, 78],
-        "同比负载率": [15, 28, 12, 14, 22, 26, 45]
-      }
-      option.series = this._createSeries(data);
-      option.legend.data = this._createLegendData(data);
-      myChart.setOption(option)
     },
     _createSeries: function (data) {
-      var series = [];
+      this.option.series = [];
       for (var key in data) {
         var item = {
           name: key,
@@ -171,19 +185,17 @@ export default {
               }])
           }
         }
-        series.push(item);
+        this.option.series.push(item);
       }
-      return series;
     },
     _createLegendData: function (data) {
-      var arr = [];
+      this.option.legend.data = [];
       for (var key in data) {
-        arr.push({
+        this.option.legend.data.push({
           name: key,
           icon: 'image://' + this.iconMap[key]
         })
       }
-      return arr;
     }
   }
 }

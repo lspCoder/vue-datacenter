@@ -39,9 +39,20 @@ export default {
     }
   },
   mounted () {
-    getUsersPowerData().then((data) => {
-      this.usersData = data;
-    })
+    this._initData();
+    setInterval(() => {
+      this._refreshData();
+    }, 10000);
+  },
+  methods: {
+    _initData () {
+      getUsersPowerData().then((data) => {
+        this.usersData = data;
+      })
+    },
+    _refreshData () {
+      this._initData();
+    }
   }
 }
 </script>

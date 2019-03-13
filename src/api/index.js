@@ -138,10 +138,10 @@ export function getElectricityAnalysisData () {
     month: {
       months: ['10月', '11月', '12月', '1月', '2月', "3月"],
       data: {
-        "总电量": [72, 70, 62, 72, 70, 61],
-        "谷电量": [15, 28, 12, 14, 22, 26],
-        "同比总电量": [54, 62, 50, 71, 62, 54],
-        "同比谷电量": [21, 33, 26, 34, 32, 24]
+        "总电量": [getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100)],
+        "谷电量": [getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100)],
+        "同比总电量": [getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100)],
+        "同比谷电量": [getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100)]
       }
     }
   }
@@ -155,15 +155,15 @@ export function getLoadAnalysisData () {
     loadAnalysis: {
       time: ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "24:00"],
       data: {
-        "负载率": [72, 70, 62, 72, 70, 61, 78],
-        "同比负载率": [15, 28, 12, 14, 22, 26, 45]
+        "负载率": [getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100)],
+        "同比负载率": [getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100)]
       }
     },
     powerAnalysis: {
       time: ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "24:00"],
       data: {
-        "负载率": [72, 70, 62, 72, 70, 61, 78],
-        "同比负载率": [70, 75, 72, 52, 50, 57, 67]
+        "负载率": [getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100)],
+        "同比负载率": [getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100), getRandom(10, 100)]
       }
     }
   }

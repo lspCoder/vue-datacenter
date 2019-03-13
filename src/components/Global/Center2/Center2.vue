@@ -2,11 +2,21 @@
   <div class="content">
     <Title :iconUrl="img" text="电量分析"/>
     <Button-Group :left="80" :text="['月电量', '日电量']" :top="50"></Button-Group>
-    <div id="electricityAnalysis"></div>
+    <chart
+      :option="option"
+      autoResize="true"
+      height="400px"
+      id="electricityAnalysis"
+      width="780px"
+    />
   </div>
 </template>
 
 <script>
+import chart from '@/components/chart'
+
+import { getElectricityAnalysisData } from '@/api'
+
 /* 这里需要导入图片才能使用否则引入图片不显示 */
 import img from '@/assets/img/title.png'
 import type1 from '@/assets/img/type1.png'
@@ -16,6 +26,9 @@ import type4 from '@/assets/img/type4.png'
 
 export default {
   name: 'Center2',
+  components: {
+    chart
+  },
   data () {
     return {
       img: img,
@@ -30,17 +43,29 @@ export default {
         "谷电量": type2,
         "同比总电量": type3,
         "同比谷电量": type4
-      }
+      },
+      option: {}
     }
   },
   mounted () {
-    this.drawLineChart()
+    this._initData();
+    this.initChartOption();
+    setInterval(() => {
+      this._refreshData();
+    }, 5000);
   },
   methods: {
-    drawLineChart () {
-      let myChart = this.$echarts.init(document.getElementById('electricityAnalysis'));
-      window.myChart = myChart;
-      let option = {
+    _initData () {
+      getElectricityAnalysisData().then((data) => {
+        this._createSeries(data.month.data);
+        this._createLegendData(data.month.data);
+      })
+    },
+    _refreshData () {
+      this._initData();
+    },
+    initChartOption () {
+      this.option = {
         tooltip: {
           trigger: 'axis'
         },
@@ -61,7 +86,8 @@ export default {
           right: 28,
           top: 50,
           padding: 0,
-          itemGap: 32
+          itemGap: 32,
+          data: []
         },
         calculable: true,
         xAxis: [{
@@ -120,20 +146,12 @@ export default {
           axisTick: {
             show: false
           }
-        }]
+        }],
+        series: []
       }
-      let data = {
-        "总电量": [72, 70, 62, 72, 70, 61],
-        "谷电量": [15, 28, 12, 14, 22, 26],
-        "同比总电量": [54, 62, 50, 71, 62, 54],
-        "同比谷电量": [21, 33, 26, 34, 32, 24]
-      }
-      option.series = this._createSeries(data);
-      option.legend.data = this._createLegendData(data);
-      myChart.setOption(option)
     },
     _createSeries: function (data) {
-      var series = [];
+      this.option.series = [];
       for (var key in data) {
         var item = {
           name: key,
@@ -156,19 +174,17 @@ export default {
             }
           }
         }
-        series.push(item);
+        this.option.series.push(item);
       }
-      return series;
     },
     _createLegendData: function (data) {
-      var arr = [];
+      this.option.legend.data = [];
       for (var key in data) {
-        arr.push({
+        this.option.legend.data.push({
           name: key,
           icon: 'image://' + this.iconMap[key]
         })
       }
-      return arr;
     }
   }
 }

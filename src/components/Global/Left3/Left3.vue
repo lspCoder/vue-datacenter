@@ -1,13 +1,15 @@
 <template>
   <div class="content">
     <Title :iconUrl="img" text="线损率"/>
-    <div id="LineLOsschart"></div>
+    <chart :option="option" autoResize="true" height="200px" id="LineLOsschart" width="360px"/>
   </div>
 </template>
 
 <script>
 import Title from '../Title'
 import echarts from 'echarts'
+import chart from '@/components/chart'
+
 import { colorRgb } from '@/utils';
 
 import { getLineLossData } from '@/api'
@@ -18,7 +20,8 @@ import img from '@/assets/img/title.png'
 export default {
   name: 'Left3',
   components: {
-    Title
+    Title,
+    chart
   },
   data () {
     return {
@@ -27,20 +30,21 @@ export default {
       total: 100,
       colors: ['#0084ff', '#5bffff'],
       fontColor: '#ffffff',
-      fontFamily: 'SourceHanSansCN-Normal'
+      fontFamily: 'SourceHanSansCN-Normal',
+      option: {}
     }
   },
   mounted () {
-    getLineLossData().then((data) => {
-      this.lineLossData = data;
-      this.drawChart(data);
-    })
+    this._initData();
+    this.initChartOption();
+    setInterval(() => {
+      this._refreshData();
+    }, 5000);
   },
   methods: {
-    drawChart (data) {
-      let myChart = this.$echarts.init(document.getElementById('LineLOsschart'));
-      let kt = Object.keys(data);
-      let vt = Object.values(data);
+    initChartOption () {
+      let kt = ['线损率', '同比增长'];
+      let vt = [0, 0];
 
       let dataStyle = {
         normal: {
@@ -73,7 +77,7 @@ export default {
         }
       }
 
-      let option = {
+      let option = this.option = {
         tooltip: {
           trigger: 'item',
           show: true,
@@ -238,7 +242,24 @@ export default {
           ]
         }
       })
-      myChart.setOption(option);
+    },
+    _initData () {
+      getLineLossData().then((data) => {
+        this.lineLossData = data;
+        let kt = Object.keys(data);
+        let vt = Object.values(data);
+        this.option.series[0].data[0].value = vt[0];
+        this.option.series[0].data[1].value = this.total - vt[0];
+        this.option.series[0].markLine.data[0][0].value = ' ' + kt[0];
+        this.option.series[1].markLine.data[0][0].value = ' ' + vt[0] + '%';
+        this.option.series[2].data[0].value = vt[1];
+        this.option.series[2].data[1].value = this.total - vt[1];
+        this.option.series[2].markLine.data[0][0].value = ' ' + kt[1];
+        this.option.series[3].markLine.data[0][0].value = ' ' + vt[1] + '%';
+      })
+    },
+    _refreshData () {
+      this._initData();
     }
   }
 }
@@ -246,8 +267,6 @@ export default {
 
 <style lang="less" scoped>
 #LineLOsschart {
-  width: 360px;
-  height: 200px;
   margin: 0 auto;
 }
 </style>

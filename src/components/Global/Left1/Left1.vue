@@ -2,7 +2,7 @@
   <div class="left1">
     <Title :iconUrl="img" text="概述"/>
     <div class="content">
-      <div id="ringChart"></div>
+      <chart :option="option" autoResize="true" height="150px" id="ringChart" width="150px"/>
       <div class="legend">
         <ul>
           <li :key="data.name" style="margin-bottom: 5px" v-for="(data) in ringChartData">
@@ -23,6 +23,8 @@
 
 <script>
 import echarts from 'echarts'
+import chart from '@/components/chart'
+
 import Title from '../Title'
 /* 获取模拟数据 */
 import { getRingChartData } from '@/api';
@@ -36,7 +38,8 @@ import hushu from '@/assets/img/hushu.png'
 export default {
   name: 'Left1',
   components: {
-    Title
+    Title,
+    chart
   },
   data () {
     return {
@@ -48,19 +51,18 @@ export default {
         '煤改电户数': hushu
       },
       ringChartData: {},
-      totalNum: 200,
-      num: 20
+      option: {}
     }
   },
   mounted: function () {
-    getRingChartData().then((data) => {
-      this.ringChartData = data;
-    })
-    this.drawChart();
+    this._initData();
+    this.initChartOption();
+    setInterval(() => {
+      this._refreshData();
+    }, 5000);
   },
   methods: {
-    drawChart: function () {
-      let myChart = this.$echarts.init(document.getElementById('ringChart'));
+    initChartOption: function () {
       let placeHolderStyle = {
         normal: {
           label: {
@@ -74,10 +76,9 @@ export default {
           borderWidth: 0
         }
       };
-      var percent = this.num / this.totalNum * 100;
-      let option = {
+      this.option = {
         "title": {
-          "text": percent + "%",
+          "text": "0%",
           "textStyle": {
             color: '#ffae00',
             fontFamily: 'Pirulen',
@@ -106,7 +107,6 @@ export default {
         toolbox: {
           show: false
         },
-
         series: [{
           name: '',
           type: 'pie',
@@ -140,7 +140,6 @@ export default {
               show: false
             }
           },
-
           data: [{
             value: this.num,
             itemStyle: {
@@ -172,10 +171,18 @@ export default {
         }
         ]
       }
-      myChart.setOption(option);
     },
-    updateChart: function () {
-
+    _initData () {
+      getRingChartData().then((data) => {
+        this.ringChartData = data;
+        let [, , totalNum, num] = data;
+        this.option.title.text = Math.floor(num.value / totalNum.value * 100) + '%';
+        this.option.series[1].data[0].value = num.value;
+        this.option.series[1].data[1].value = totalNum.value - num.value;
+      })
+    },
+    _refreshData: function () {
+      this._initData();
     }
   }
 }

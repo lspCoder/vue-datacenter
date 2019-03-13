@@ -39,11 +39,21 @@ export default {
     }
   },
   mounted () {
-    getCityPowerData().then((data) => {
-      this.cityAreaAlarmData = data
-    })
+    this._initData();
+    setInterval(() => {
+      this._refreshData();
+    }, 5000);
+  },
+  methods: {
+    _initData () {
+      getCityPowerData().then((data) => {
+        this.cityAreaAlarmData = data
+      })
+    },
+    _refreshData () {
+      this._initData();
+    }
   }
-
 }
 </script>
 
@@ -59,7 +69,7 @@ export default {
   }
   .left-text {
     display: inline-block;
-    width: 120px;
+    width: 145px;
     .city {
       font-size: 18px;
       color: #ffffff;
@@ -82,7 +92,7 @@ export default {
   }
   .right-text {
     display: inline-block;
-    width: 120px;
+    width: 145px;
     margin-left: 10px;
     .power {
       color: rgb(91, 255, 255);

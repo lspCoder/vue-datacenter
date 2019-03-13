@@ -1,6 +1,11 @@
 <template>
   <div class="content">
-    <div :key="item.name" class="center" v-for="item in electricityData">
+    <div
+      :class="{borderLR: item.name === '用电量'}"
+      :key="item.name"
+      class="center"
+      v-for="item in electricityData"
+    >
       <p>
         <img :src="img" alt="power">
       </p>
@@ -24,9 +29,20 @@ export default {
     }
   },
   mounted () {
-    getElectricityData().then((data) => {
-      this.electricityData = data
-    })
+    this._initData();
+    setInterval(() => {
+      this._refreshData();
+    }, 5000);
+  },
+  methods: {
+    _initData () {
+      getElectricityData().then((data) => {
+        this.electricityData = data
+      })
+    },
+    _refreshData () {
+      this._initData()
+    }
   }
 }
 </script>
@@ -55,6 +71,11 @@ export default {
   font-size: 12px;
   font-family: Pirulen;
   font-weight: bold;
+}
+.borderLR {
+  padding: 0 40px;
+  border-left: 1px solid rgba(57, 60, 69, 0.9);
+  border-right: 1px solid rgba(57, 60, 69, 0.9);
 }
 </style>
 

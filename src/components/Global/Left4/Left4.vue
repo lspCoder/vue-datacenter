@@ -2,15 +2,21 @@
   <div class="content">
     <Title :iconUrl="img" text="负载率"/>
     <div class="chart">
-      <div id="top-chart"></div>
-      <div id="bottom-chart"></div>
+      <chart :option="topOption" autoResize="true" height="70px" id="top-chart" width="360px"/>
+      <chart
+        :option="bottomOption"
+        autoResize="true"
+        height="200px"
+        id="bottom-chart"
+        width="360px"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import Title from '../Title'
 import echarts from 'echarts'
+import chart from '@/components/chart'
 import { getLoadRateData } from '@/api';
 
 /* 这里需要导入图片才能使用否则引入图片不显示 */
@@ -20,27 +26,45 @@ import power from '@/assets/img/power.png'
 export default {
   name: 'Left4',
   components: {
-    Title
+    chart
   },
   data () {
     return {
       img: img,
       loadTate: {},
-      stateData: {}
+      stateData: {},
+      topOption: {},
+      bottomOption: {}
     }
   },
   mounted () {
-    this.drawTopChart()
-    this.drawBottomChart()
-    // getLoadRateData().then((data) => {
-    //   this.loadTate = data['loadTate']
-    //   this.stateData = data['state']
-    // })
+    this._initData();
+    this.initChartOption();
+    setInterval(() => {
+      this._refreshData();
+    }, 5000);
   },
   methods: {
-    drawTopChart () {
-      let topChart = this.$echarts.init(document.getElementById('top-chart'));
-      let option = {
+    initChartOption () {
+      this._initTopChart()
+      this._initBottomChart()
+    },
+    _initData () {
+      getLoadRateData().then((data) => {
+        this.loadTate = data['loadTate']
+        this.stateData = data['state']
+        this.topOption.yAxis[1].data[0] = data['loadTate'];
+        this.topOption.series[0].data[0] = data['loadTate'];
+
+        this.bottomOption.yAxis[1].data = data['state'].value;
+        this.bottomOption.series[0].data = data['state'].value
+      })
+    },
+    _refreshData () {
+      this._initData();
+    },
+    _initTopChart () {
+      this.topOption = {
         tooltip: {
           trigger: 'axis',
           formatter: '{a}: {c0}'
@@ -168,11 +192,9 @@ export default {
           zlevel: -1
         }]
       }
-      topChart.setOption(option);
     },
-    drawBottomChart () {
-      let bottomChart = this.$echarts.init(document.getElementById('bottom-chart'));
-      let option = {
+    _initBottomChart () {
+      this.bottomOption = {
         tooltip: {
           trigger: 'axis',
           formatter: '{b0}: {c0}'
@@ -276,7 +298,6 @@ export default {
           zlevel: -1
         }]
       }
-      bottomChart.setOption(option);
     }
   }
 }
