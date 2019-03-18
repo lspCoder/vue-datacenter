@@ -86,5 +86,16 @@ export default {
   color: rgb(91, 255, 255);
   font-size: 20px;
 }
+.hightLine {
+  // display: inline-block;
+  width: 100%;
+  height: 1px;
+  background: -webkit-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+}
 </style>
 

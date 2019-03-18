@@ -69,15 +69,15 @@ export function getLineLossData () {
 export function getElectricityData () {
   let electricityData = [{
     name: '供电量',
-    value: 2000 + Math.floor(Math.random() * 1000) + 'KW.h'
+    value: 2000 + Math.floor(Math.random() * 1000)
   },
   {
     name: '用电量',
-    value: 6000 + Math.floor(Math.random() * 1000) + 'KW.h'
+    value: 6000 + Math.floor(Math.random() * 1000)
   },
   {
     name: '煤改电户用电',
-    value: 200 + Math.floor(Math.random() * 100) + 'KW.h'
+    value: 200 + Math.floor(Math.random() * 100)
   }
   ]
   return new Promise(function (resolve, reject) {

@@ -1,15 +1,25 @@
 <template>
   <div :style="{left: left + 'px', top: top + 'px'}" class="btn-container">
-    <span class="btn">{{text[0]}}</span>\
-    <span class="btn">{{text[1]}}</span>
+    <span
+      :key="text"
+      class="btn"
+      v-bind:class="{active : active == text}"
+      v-for="text in textArr"
+      v-on:click="selected(text)"
+    >{{text}}</span>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Button-Group',
+  data () {
+    return {
+      active: '按钮'
+    }
+  },
   props: {
-    text: {
+    textArr: {
       type: Array,
       default: function () {
         return ['按钮', '按钮']
@@ -21,6 +31,11 @@ export default {
     top: {
       type: Number
     }
+  },
+  methods: {
+    selected: function (text) {
+      this.active = text;
+    }
   }
 }
 </script>
@@ -28,6 +43,7 @@ export default {
 <style lang="less" scoped>
 .btn-container {
   position: absolute;
+  z-index: 10;
 }
 .btn {
   color: rgba(255, 255, 255, 0.6);
@@ -37,8 +53,21 @@ export default {
   font-size: 18px;
   text-align: center;
   line-height: 30px;
+  margin: 0 5px;
   font-family: SourceHanSansCN-Normal;
   background-image: url('../../../assets/img/default.png');
+}
+.active {
+  color: rgba(255, 255, 255);
+  width: 80px;
+  height: 30px;
+  display: inline-block;
+  font-size: 18px;
+  text-align: center;
+  line-height: 30px;
+  margin: 0 5px;
+  font-family: SourceHanSansCN-Normal;
+  background-image: url('../../../assets/img/selected.png');
 }
 </style>
 

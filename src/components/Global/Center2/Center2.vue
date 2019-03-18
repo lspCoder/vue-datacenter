@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <Title :iconUrl="img" text="电量分析"/>
-    <Button-Group :left="80" :text="['月电量', '日电量']" :top="50"></Button-Group>
+    <Button-Group :left="80" :textArr="['月电量', '日电量']" :top="50"></Button-Group>
     <chart
       :option="option"
       autoResize="true"

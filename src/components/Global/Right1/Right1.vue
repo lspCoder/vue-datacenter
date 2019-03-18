@@ -10,18 +10,30 @@
         <img :src="img" alt="power">
       </p>
       <p class="name">{{item.name}}</p>
-      <p class="value">{{item.value}}</p>
+      <countTo
+        :autoplay="true"
+        :duration="3000"
+        :endVal="item.value"
+        :startVal="0"
+        class="value"
+        suffix="KW.h"
+      ></countTo>
     </div>
   </div>
 </template>
 
 <script>
+import countTo from 'vue-count-to'
+
 import { getElectricityData } from '@/api'
 
 import power from '@/assets/img/power.png'
 
 export default {
   name: 'Right1',
+  components: {
+    countTo
+  },
   data () {
     return {
       img: power,
@@ -32,7 +44,7 @@ export default {
     this._initData();
     setInterval(() => {
       this._refreshData();
-    }, 5000);
+    }, 10000);
   },
   methods: {
     _initData () {
@@ -71,6 +83,8 @@ export default {
   font-size: 12px;
   font-family: Pirulen;
   font-weight: bold;
+  min-width: 100px;
+  display: inline-block;
 }
 .borderLR {
   padding: 0 40px;

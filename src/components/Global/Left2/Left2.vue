@@ -8,7 +8,12 @@
       </div>
       <div class="right-text">
         <p class="power">
-          {{cityAreaAlarmData.power}}
+          <countTo
+            :autoplay="true"
+            :duration="3000"
+            :endVal="cityAreaAlarmData.power"
+            :startVal="0"
+          ></countTo>
           <span class="unit">KVA</span>
         </p>
         <p :style="{color: alarmColor}" class="alarm">{{cityAreaAlarmData.alarm}}</p>
@@ -18,11 +23,16 @@
 </template>
 
 <script>
+import countTo from 'vue-count-to'
+
 /* 获取模拟数据 */
 import { getCityPowerData } from '@/api';
 
 export default {
   name: 'Left2',
+  components: {
+    countTo
+  },
   data () {
     return {
       cityAreaAlarmData: {}
@@ -42,7 +52,7 @@ export default {
     this._initData();
     setInterval(() => {
       this._refreshData();
-    }, 5000);
+    }, 10000);
   },
   methods: {
     _initData () {
@@ -92,13 +102,14 @@ export default {
   }
   .right-text {
     display: inline-block;
-    width: 145px;
+    width: 165px;
     margin-left: 10px;
     .power {
       color: rgb(91, 255, 255);
       letter-spacing: 3px;
       font-size: 24px;
       font-family: Pirulen;
+      min-width: 110px;
     }
     .alarm {
       font-size: 18px;

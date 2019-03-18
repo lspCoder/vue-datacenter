@@ -9,10 +9,13 @@
             <img :src="iconMap[data.name]" alt>
             <div class="text">
               <p class="name">{{data.name}}</p>
-              <p class="value">
-                {{data.value}}
-                <span class="unit">{{data.unit}}</span>
-              </p>
+              <countTo
+                :autoplay="true"
+                :duration="3000"
+                :endVal="data.value"
+                :startVal="0"
+                class="value"
+              ></countTo>
             </div>
           </li>
         </ul>
@@ -24,6 +27,7 @@
 <script>
 import echarts from 'echarts'
 import chart from '@/components/chart'
+import countTo from 'vue-count-to'
 
 import Title from '../Title'
 /* 获取模拟数据 */
@@ -39,7 +43,8 @@ export default {
   name: 'Left1',
   components: {
     Title,
-    chart
+    chart,
+    countTo
   },
   data () {
     return {
@@ -59,7 +64,7 @@ export default {
     this.initChartOption();
     setInterval(() => {
       this._refreshData();
-    }, 5000);
+    }, 20000);
   },
   methods: {
     initChartOption: function () {
@@ -215,9 +220,11 @@ export default {
   letter-spacing: 1px;
 }
 .value {
+  display: inline-block;
   color: rgb(91, 255, 255);
   font-size: 16px;
   font-family: Pirulen;
+  min-width: 120px;
 }
 .unit {
   font-size: 14px;
