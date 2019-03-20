@@ -30,8 +30,10 @@ import chart from '@/components/chart'
 import countTo from 'vue-count-to'
 
 import Title from '../Title'
-/* 获取模拟数据 */
-import { getRingChartData } from '@/api';
+
+import { getRingChartData } from '@/api'
+
+import { mapGetters } from 'vuex'
 
 /* 这里需要导入图片才能使用否则引入图片不显示 */
 import img from '@/assets/img/title.png'
@@ -65,6 +67,11 @@ export default {
     setInterval(() => {
       this._refreshData();
     }, 20000);
+  },
+  computed: {
+    ...mapGetters([
+      'ringChartData'
+    ])
   },
   methods: {
     initChartOption: function () {
@@ -164,17 +171,14 @@ export default {
                   offset: 1,
                   color: '#5bffff'
                 }])
-
               }
             }
           },
           {
             value: this.totalNum - this.num,
             itemStyle: placeHolderStyle
-          }
-          ]
-        }
-        ]
+          }]
+        }]
       }
     },
     _initData () {
@@ -185,9 +189,22 @@ export default {
         this.option.series[1].data[0].value = num.value;
         this.option.series[1].data[1].value = totalNum.value - num.value;
       })
+      // this.$store.dispatch('GetRingChartData');
+      // this.$nextTick(() => {
+      //   this.ringChartData = this.$store.state.ringChartData
+      // })
     },
     _refreshData: function () {
       this._initData();
+      // this.$store.dispatch('GetRingChartData');
+      // this.$nextTick(() => {
+      //   this.ringChartData = this.$store.state.ringChartData
+      //   var data = this.ringChartData;
+      //   let [, , totalNum, num] = data;
+      //   this.option.title.text = Math.floor(num.value / totalNum.value * 100) + '%';
+      //   this.option.series[1].data[0].value = num.value;
+      //   this.option.series[1].data[1].value = totalNum.value - num.value;
+      // })
     }
   }
 }

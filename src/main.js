@@ -15,6 +15,8 @@ Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.config.silent = true
 
+window.store = store
+
 new Vue({
   // router,
   store,

@@ -15,7 +15,7 @@ export default {
   name: 'Button-Group',
   data () {
     return {
-      active: '按钮'
+      active: this.textArr[0]
     }
   },
   props: {

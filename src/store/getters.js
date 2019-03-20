@@ -1,4 +1,4 @@
-export const ringChartData = (state) => state.ringChartData
+export const ringChartData = state => state.ringChartData
 
 export const cityAreaAlarmData = (state) => state.cityAreaAlarmData
 
