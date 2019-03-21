@@ -3,8 +3,8 @@
     <Title :iconUrl="img" text="电量分析"/>
     <Button-Group :left="80" :textArr="['月电量', '日电量']" :top="50"></Button-Group>
     <chart
+      :autoResize="true"
       :option="option"
-      autoResize="true"
       height="400px"
       id="electricityAnalysis"
       width="780px"

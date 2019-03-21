@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <Title :iconUrl="img" text="线损率"/>
-    <chart :option="option" autoResize="true" height="200px" id="LineLOsschart" width="360px"/>
+    <chart :autoResize="true" :option="option" height="200px" id="LineLOsschart" width="360px"/>
   </div>
 </template>
 

@@ -2,10 +2,10 @@
   <div class="content">
     <Title :iconUrl="img" text="负载率"/>
     <div class="chart">
-      <chart :option="topOption" autoResize="true" height="70px" id="top-chart" width="360px"/>
+      <chart :autoResize="true" :option="topOption" height="70px" id="top-chart" width="360px"/>
       <chart
+        :autoResize="true"
         :option="bottomOption"
-        autoResize="true"
         height="200px"
         id="bottom-chart"
         width="360px"
