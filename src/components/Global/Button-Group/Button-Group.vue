@@ -35,6 +35,7 @@ export default {
   methods: {
     selected: function (text) {
       this.active = text;
+      this.$emit('select', text)  //  像父组件传递参数
     }
   }
 }

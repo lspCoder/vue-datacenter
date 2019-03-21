@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <Title :iconUrl="img" text="电量分析"/>
-    <Button-Group :left="80" :textArr="['月电量', '日电量']" :top="50"></Button-Group>
+    <Button-Group :left="80" :textArr="['月电量', '日电量']" :top="50" v-on:select="changeData"></Button-Group>
     <chart
       :autoResize="true"
       :option="option"
@@ -44,7 +44,8 @@ export default {
         "同比总电量": type3,
         "同比谷电量": type4
       },
-      option: {}
+      option: {},
+      currentData: 'month'
     }
   },
   mounted () {
@@ -55,14 +56,26 @@ export default {
     }, 5000);
   },
   methods: {
+    changeData (data) {
+      var map = {
+        '月电量': 'month',
+        '日电量': 'day'
+      }
+      this.currentData = map[data];
+      this.getData(this.currentData)
+    },
     _initData () {
+      this.getData(this.currentData)
+    },
+    getData (type) {
       getElectricityAnalysisData().then((data) => {
-        this._createSeries(data.month.data);
-        this._createLegendData(data.month.data);
+        this._createSeries(data[type].data);
+        this._createLegendData(data[type].data);
+        this.option.xAxis[0].data = data[type].date;
       })
     },
     _refreshData () {
-      this._initData();
+      this.getData(this.currentData)
     },
     initChartOption () {
       this.option = {
@@ -92,7 +105,7 @@ export default {
         calculable: true,
         xAxis: [{
           type: 'category',
-          data: ['10月', '11月', '12月', '1月', '2月', "3月"],
+          // data: ['10月', '11月', '12月', '1月', '2月', "3月"],
           axisLine: {
             show: true,
             lineStyle: {

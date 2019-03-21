@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <Title :iconUrl="img" text="负荷分析"/>
-    <Button-Group :left="80" :textArr="['负荷分析', '负载分析']" :top="50"></Button-Group>
+    <Button-Group :left="80" :textArr="['负荷分析', '负载分析']" :top="50" v-on:select="changeData"></Button-Group>
     <chart :autoResize="true" :option="option" height="400px" id="powerAnalysis" width="780px"/>
   </div>
 </template>
@@ -43,7 +43,8 @@ export default {
           toColor: "rgba(0, 170, 255, 0.1)"
         }
       },
-      option: {}
+      option: {},
+      currentData: 'loadAnalysis'
     }
   },
   mounted () {
@@ -54,14 +55,26 @@ export default {
     }, 5000);
   },
   methods: {
+    changeData (data) {
+      var map = {
+        '负荷分析': 'loadAnalysis',
+        '负载分析': 'powerAnalysis'
+      }
+      this.currentData = map[data];
+      this.getData(this.currentData)
+    },
     _initData () {
+      this.getData(this.currentData)
+    },
+    getData (type) {
       getLoadAnalysisData().then((data) => {
-        this._createSeries(data.loadAnalysis.data);
-        this._createLegendData(data.loadAnalysis.data);
+        this._createSeries(data[type].data);
+        this._createLegendData(data[type].data);
+        this.option.xAxis[0].data = data[type].time;
       })
     },
     _refreshData () {
-      this._initData();
+      this.getData(this.currentData)
     },
     initChartOption () {
       this.option = {
@@ -91,7 +104,7 @@ export default {
         calculable: true,
         xAxis: [{
           type: 'category',
-          data: ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "24:00"],
+          // data: ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "24:00"],
           axisLine: {
             show: true,
             lineStyle: {

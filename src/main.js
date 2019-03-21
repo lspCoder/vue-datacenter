@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Dashboard from './Dashboard.vue'
 // import router from './router'
-import store from './store'
+// import store from './store'
 
 import './assets/css/base.less'
 
@@ -14,10 +14,8 @@ Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
 
-window.store = store
-
 new Vue({
   // router,
-  store,
+  // store,
   render: h => h(Dashboard)
 }).$mount('#app')

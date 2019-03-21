@@ -26,6 +26,14 @@ export function getRandom (min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+export function getRandomByCount (count, min, max) {
+  var arr = [];
+  for (var i = 0; i < count; i++) {
+    arr.push(getRandom(min, max));
+  }
+  return arr;
+}
+
 // 函数防抖，指触发事件后在 n 秒内函数只能执行一次，如果在 n 秒内又触发了事件，则会重新计算函数执行时间,immediate参数是立即执行一次在等n秒后重新触发
 // 一般用于输入框向后台校验，防止过于频繁发送请求
 /**

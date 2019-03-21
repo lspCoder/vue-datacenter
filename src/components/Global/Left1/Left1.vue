@@ -5,7 +5,7 @@
       <chart :autoResize="true" :option="option" height="150px" id="ringChart" width="150px"/>
       <div class="legend">
         <ul>
-          <li :key="data.name" style="margin-bottom: 5px" v-for="(data) in chartData">
+          <li :key="data.name" style="margin-bottom: 5px" v-for="(data) in ringChartData">
             <img :src="iconMap[data.name]" alt>
             <div class="text">
               <p class="name">{{data.name}}</p>
@@ -33,8 +33,6 @@ import Title from '../Title'
 
 import { getRingChartData } from '@/api'
 
-import { mapGetters } from 'vuex'
-
 /* 这里需要导入图片才能使用否则引入图片不显示 */
 import img from '@/assets/img/title.png'
 import power from '@/assets/img/power.png'
@@ -57,7 +55,7 @@ export default {
         '台区总数': area,
         '煤改电户数': hushu
       },
-      // ringChartData: {},
+      ringChartData: {},
       option: {}
     }
   },
@@ -67,11 +65,6 @@ export default {
     setInterval(() => {
       this._refreshData();
     }, 20000);
-  },
-  computed: {
-    ...mapGetters([
-      'ringChartData'
-    ])
   },
   methods: {
     initChartOption: function () {
@@ -182,19 +175,13 @@ export default {
       }
     },
     _initData () {
-      // getRingChartData().then((data) => {
-      //   this.ringChartData = data;
-      //   let [, , totalNum, num] = data;
-      //   this.option.title.text = Math.floor(num.value / totalNum.value * 100) + '%';
-      //   this.option.series[1].data[0].value = num.value;
-      //   this.option.series[1].data[1].value = totalNum.value - num.value;
-      // })
-      this.$store.dispatch('GetRingChartData')
-      // var data = this.chartData;
-      // let [, , totalNum, num] = data;
-      // this.option.title.text = Math.floor(num.value / totalNum.value * 100) + '%';
-      // this.option.series[1].data[0].value = num.value;
-      // this.option.series[1].data[1].value = totalNum.value - num.value;
+      getRingChartData().then((data) => {
+        this.ringChartData = data;
+        let [, , totalNum, num] = data;
+        this.option.title.text = Math.floor(num.value / totalNum.value * 100) + '%';
+        this.option.series[1].data[0].value = num.value;
+        this.option.series[1].data[1].value = totalNum.value - num.value;
+      })
     },
     _refreshData: function () {
       this._initData()
