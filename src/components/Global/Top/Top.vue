@@ -53,7 +53,14 @@ export default {
 
 <style lang="less" scoped>
 .top {
-  &::after {
+  border-bottom: 3px solid rgba(11, 24, 36, 0.6);
+  border-image: -webkit-linear-gradient(
+      top,
+      rgba(11, 24, 36, 0.6),
+      rgba(0, 154, 168, 0.6)
+    )
+    1 stretch;
+  &:after {
     visibility: hidden;
     display: block;
     font-size: 0;
@@ -64,6 +71,7 @@ export default {
   .left {
     float: left;
     width: 200px;
+    border-right: 2px solid rgb(57, 60, 69);
     .topTitle {
       margin: 10px 0px 0px 25px;
       color: #ffffff;
@@ -94,7 +102,7 @@ export default {
     color: #ffffff;
     font-family: 'Pirulen';
     font-size: 18px;
-    margin-top: 40px;
+    margin-top: 35px;
   }
 }
 </style>

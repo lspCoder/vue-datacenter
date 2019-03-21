@@ -204,6 +204,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.content {
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 1);
+  border-image: -webkit-linear-gradient(
+      left,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0)
+    )
+    1 round;
+}
 #electricityAnalysis {
   width: 780px;
   height: 400px;
