@@ -1,6 +1,10 @@
 # vue-datacenter
 
-[build-info](https://travis-ci.org/lspCoder/vue-datacenter.svg?branch=master)
+<p align="center">
+<a href="https://github.com/lspCoder/vue-datacenter">
+    <img src="https://travis-ci.org/lspCoder/vue-datacenter.svg?branch=master"/> 
+    </a> 
+</p>
 
 ## Project setup
 
