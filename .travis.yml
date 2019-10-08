@@ -15,20 +15,20 @@ cache:
 install:
   - npm install
 
-# before_script:
-#   - git config user.name "yourusername"
-#   - git config user.email "youremail@xx.com"
-#   - git clone --branch gh-pages https://${GH_REF} dist
+before_script:
+  - git config user.name "lspCoder"
+  - git config user.email "544295975@qq.com"
+  # - git clone --branch gh-pages https://${GH_REF} dist
 
 script:
   - yarn run build
-# after_success:
-#   - cd dist
-#   - echo "lightmoon.pw" > CNAME
-#   - cp index.html 404.html
-#   - git add --all .
-#   - git commit --message "Automatically update from travis-ci"
-#   - git push --quiet --force  "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages
+after_success:
+  #   - cd dist
+  #   - echo "lightmoon.pw" > CNAME
+  #   - cp index.html 404.html
+  - git add --all .
+  - git commit --message "Automatically update from travis-ci"
+  - git push --quiet --force  "https://${GH_TOKEN}@${GH_REF}" gh-pages:master
 # Note: you should set Environment Variables here or 'Settings' on travis-ci.org
 # env:
 #   global:
