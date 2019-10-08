@@ -7,7 +7,7 @@
       :layout="layout"
       :margin="[0, 0]"
       :responsive="true"
-      :row-height="41"
+      :row-height="39"
       :use-css-transforms="true"
       :vertical-compact="true"
     >
@@ -32,7 +32,7 @@
 // @ is an alias to /src
 import { GridLayout, GridItem } from 'vue-grid-layout'
 
-var testLayout = [
+let mainLayout = [
   { x: 0, y: 0, w: 12, h: 1.5, i: 'top', static: false, component: 'Top' },
 
   { x: 0, y: 2, w: 3, h: 5, i: 'left1', static: false, component: 'Left1' },
@@ -55,7 +55,7 @@ export default {
   },
   data () {
     return {
-      layout: testLayout,
+      layout: mainLayout,
       draggable: true,
       resizable: true,
       index: 0,

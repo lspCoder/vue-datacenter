@@ -1,8 +1,8 @@
 <template>
   <div class="content">
-    <Title :iconUrl="img" text="负荷分析"/>
+    <Title :iconUrl="img" text="负荷分析" />
     <Button-Group :left="80" :textArr="['负荷分析', '负载分析']" :top="50" v-on:select="changeData"></Button-Group>
-    <chart :autoResize="true" :option="option" height="400px" id="powerAnalysis" width="780px"/>
+    <chart :autoResize="true" :option="option" height="400px" id="powerAnalysis" width="780px" />
   </div>
 </template>
 
