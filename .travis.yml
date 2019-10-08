@@ -15,8 +15,7 @@ cache:
 install:
   - npm install
 
-before_script:
-  - rm dist
+# before_script:
 #   - git config user.name "yourusername"
 #   - git config user.email "youremail@xx.com"
 #   - git clone --branch gh-pages https://${GH_REF} dist
