@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" :style="style"></div>
+  <div :id="id"></div>
 </template>
 
 <script>
@@ -9,14 +9,14 @@ export default {
     id: {
       type: String
     },
-    width: {
-      type: String,
-      default: "100%"
-    },
-    height: {
-      type: String,
-      default: "300px"
-    },
+    // width: {
+    //   type: String,
+    //   default: "100%"
+    // },
+    // height: {
+    //   type: String,
+    //   default: "300px"
+    // },
     autoResize: {
       type: Boolean,
       default: false
@@ -27,12 +27,12 @@ export default {
     }
   },
   computed: {
-    style () {
-      return {
-        height: this.height,
-        width: this.width
-      };
-    }
+    // style () {
+    //   return {
+    //     height: this.height,
+    //     width: this.width
+    //   };
+    // }
   },
   mounted () {
     this.init();

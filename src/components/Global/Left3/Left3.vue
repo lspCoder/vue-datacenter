@@ -1,7 +1,7 @@
 <template>
   <div class="content">
-    <Title :iconUrl="img" text="线损率"/>
-    <chart :autoResize="true" :option="option" height="200px" id="LineLOsschart" width="360px"/>
+    <Title :iconUrl="img" text="线损率" />
+    <chart :autoResize="true" :option="option" id="LineLOsschart" />
   </div>
 </template>
 
@@ -136,7 +136,7 @@ export default {
           },
           data: [
             [
-              { value: ' ' + kt[0], x: 121, y: 43 },
+              { value: ' ' + kt[0], x: 121, y: 31 },
               { x: 215, y: 80 }
             ]
           ]
@@ -212,7 +212,7 @@ export default {
           },
           data: [
             [
-              { value: ' ' + kt[1], x: 121, y: 28 },
+              { value: ' ' + kt[1], x: 121, y: 16 },
               { x: 215, y: 55 }
             ]
           ]
@@ -267,6 +267,8 @@ export default {
 
 <style lang="less" scoped>
 #LineLOsschart {
+  width: 395px;
+  height: 200px;
   margin: 0 auto;
 }
 </style>

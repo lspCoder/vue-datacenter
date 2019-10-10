@@ -1,12 +1,12 @@
 <template>
   <div class="left1">
-    <Title :iconUrl="img" text="概述"/>
+    <Title :iconUrl="img" text="概述" />
     <div class="content">
-      <chart :autoResize="true" :option="option" height="150px" id="ringChart" width="150px"/>
+      <chart :autoResize="true" :option="option" id="ringChart" />
       <div class="legend">
         <ul>
           <li :key="data.name" style="margin-bottom: 5px" v-for="(data) in ringChartData">
-            <img :src="iconMap[data.name]" alt>
+            <img :src="iconMap[data.name]" alt />
             <div class="text">
               <p class="name">{{data.name}}</p>
               <countTo
@@ -199,8 +199,8 @@ export default {
   justify-content: center;
 }
 #ringChart {
-  width: 150px;
-  height: 150px;
+  width: 155px;
+  height: 155px;
   display: inline-block;
   background: url('../../../assets/img/ringChart.png') no-repeat 50% 70%;
 }
