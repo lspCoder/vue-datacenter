@@ -44,6 +44,7 @@ export default {
 
       if (this.autoResize) {
         this.$el.addEventListener('resize', this.chart.resize);
+        window.addEventListener('resize', this.chart.resize);
       }
     }
   },

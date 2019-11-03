@@ -7,7 +7,7 @@
       :layout="layout"
       :margin="[0, 0]"
       :responsive="true"
-      :row-height="39"
+      :row-height="rowHeight"
       :use-css-transforms="true"
       :vertical-compact="true"
     >
@@ -59,11 +59,16 @@ export default {
       draggable: true,
       resizable: true,
       index: 0,
+      rowHeight: 108,
       timerId: null
     }
   },
   mounted: function () {
+    this.rowHeight = (window.innerHeight - 50) / 24.5;
     this.timerId = setInterval(this.updateAll, 5000);
+    window.addEventListener('resize', (e) => {
+      this.rowHeight = (window.innerHeight - 50) / 24.5;
+    }, false);
   },
   methods: {
     updateAll: function () {
