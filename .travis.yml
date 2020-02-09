@@ -23,7 +23,8 @@ before_script:
 script:
   - yarn run build
 after_success:
-  # - cd dist
+  - cd dist
+  - git init
   - git add --all .
   - git commit --message "Automatically update from travis-ci"
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
