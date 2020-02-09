@@ -16,20 +16,18 @@ install:
   - npm install
 
 before_script:
-  - git config user.name "lspCoder"
-  - git config user.email "544295975@qq.com"
+  - git config user.name ${U_NAME}
+  - git config user.email ${U_EMAIL}
   # - git clone --branch gh-pages https://${GH_REF} dist
 
 script:
   - yarn run build
 after_success:
-  #   - cd dist
-  #   - echo "lightmoon.pw" > CNAME
-  #   - cp index.html 404.html
+  # - cd dist
   - git add --all .
   - git commit --message "Automatically update from travis-ci"
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
 # Note: you should set Environment Variables here or 'Settings' on travis-ci.org
-env:
-  global:
-    - GH_REF: github.com/lspCoder/vue-datacenter.git
+# env:
+#   global:
+#     - GH_REF: github.com/zytx121/vue-blog.git
