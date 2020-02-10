@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '/vue-datacenter/dist/',
+  publicPath: '.',
   outputDir: undefined,
   assetsDir: undefined,
   runtimeCompiler: undefined,
